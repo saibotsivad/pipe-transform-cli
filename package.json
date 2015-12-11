@@ -1,0 +1,26 @@
+{
+  "name": "pipe-transform-cli",
+  "version": "1.0.0",
+  "description": "Command line utility to pipe one input encoding to another encoding.",
+  "bin": {
+    "pipetransform": "bin.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tobiaslabs/pipe-transform-cli.git"
+  },
+  "keywords": [
+    "pipe",
+    "cli",
+    "encoding"
+  ],
+  "author": "saibotsivad",
+  "license": "VOL",
+  "bugs": {
+    "url": "https://github.com/tobiaslabs/pipe-transform-cli/issues"
+  },
+  "homepage": "https://github.com/tobiaslabs/pipe-transform-cli#readme"
+}
