@@ -12,19 +12,38 @@ Run it from the command line:
 
 	pipetransform [--trim] [input encoding] [output encoding]
 
+## supported encodings
+
+Supported input and output encodings are:
+
+* `binary`
+* `utf8`
+* `hex`
+* `base64`
+* `base64url`
+
+## examples
+
 For example, pipe the [openssl](https://www.openssl.org) hashing output
-to turn it to base64:
+to turn it to [base64url]():
 
-	openssl dgst -sha256 -binary text.txt | pipetransform utf8 base64
+	openssl dgst -sha256 -binary text.txt | pipetransform binary base64url
 
-Some pipes insert a newline at the end, in which case you can pass
-the `--trim` option as the first parameter:
+## trailing newline trim
+
+If the input encoding is `utf8`, `base64`, `base64url`, or `hex`, trailing
+newlines will be stripped.
+
+With the trailing newline stripped the output is:
 
 	echo words | pipetransform --trim utf8 hex # => 776f726473
 
-While without the trim, the output is different:
+While without the trim, the output would have been different:
 
-	echo words | pipetransform --trim utf8 hex # => 776f7264730a
+	echo words | bad-pipetransform --trim utf8 hex # => 776f7264730a
+
+> Note: Previously the module supported the `--trim` parameter. This
+> is no longer used, but adding it won't break anything.
 
 ## license
 
