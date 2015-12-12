@@ -42,9 +42,6 @@ While without the trim, the output would have been different:
 
 	echo words | bad-pipetransform --trim utf8 hex # => 776f7264730a
 
-> Note: Previously the module supported the `--trim` parameter. This
-> is no longer used, but adding it won't break anything.
-
 ## license
 
 Published and released under the [Very Open License](http://veryopenlicense.com)

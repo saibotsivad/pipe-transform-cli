@@ -6,6 +6,9 @@ var base64url = require('base64-url')
 var inputEncoding = process.argv[2]
 var outputEncoding = process.argv[3]
 
+// backwards compatability: previously trimming the trailing whitespace
+// was manual, while now it's auto detected, but we don't want to break
+// things for other people
 if (process.argv[2] === '--trim') {
 	inputEncoding = process.argv[3]
 	outputEncoding = process.argv[4]
