@@ -10,7 +10,7 @@ Command line utility to pipe one input encoding to another encoding
 
 Run it from the command line:
 
-	pipetransform [--trim] [input encoding] [output encoding]
+	pipetransform [input encoding] [output encoding]
 
 ## supported encodings
 
