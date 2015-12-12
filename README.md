@@ -31,8 +31,8 @@ to turn it to [base64url]():
 
 ## trailing newline trim
 
-If the input encoding is `utf8`, `base64`, `base64url`, or `hex`, trailing
-newlines will be stripped.
+If the input encoding is `utf8`, `base64`, `base64url`, or `hex`, the final
+trailing newline will be stripped.
 
 With the trailing newline stripped the output is:
 
