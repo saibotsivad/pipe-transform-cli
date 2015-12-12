@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-var concatStream = require('concat-stream')
 var base64url = require('base64-url')
+var through2 = require('through2')
 
 var inputEncoding = process.argv[2]
 var outputEncoding = process.argv[3]
@@ -17,22 +17,44 @@ if (process.argv[2] === '--trim') {
 if (!encodingIsAllowed(inputEncoding) || !encodingIsAllowed(outputEncoding)) {
 	printErrorMessage()
 } else {
-	process.stdin.pipe(concatStream(function(data) {
-		var inputBuffer = data
-		if (inputEncoding === 'hex' || inputEncoding === 'base64') {
-			inputBuffer = new Buffer(possiblyTrimTail(data.toString('utf8')), inputEncoding)
-		} else if (inputEncoding === 'base64url') {
-			inputBuffer = new Buffer(base64url.unescape(possiblyTrimTail(data.toString('utf8'))), 'base64')
-		} else if (inputEncoding === 'utf8') {
-			inputBuffer = new Buffer(possiblyTrimTail(data.toString('utf8')), 'utf8')
-		}
+	var turnIntoProperInputBuffer = function identity(data) { return data }
 
+	if (inputEncoding === 'hex' || inputEncoding === 'base64') {
+		turnIntoProperInputBuffer = function(data) { return new Buffer(data.toString('utf8'), inputEncoding) }
+	} else if (inputEncoding === 'base64url') {
+		turnIntoProperInputBuffer = function(data) { return new Buffer(base64url.unescape(data.toString('utf8')), 'base64') }
+	} else if (inputEncoding === 'utf8') {
+		turnIntoProperInputBuffer = function(data) { return new Buffer(data.toString('utf8'), 'utf8') }
+	}
+
+	function turnIntoProperOutputBuffer(inputBuffer) {
 		var output = inputBuffer.toString(outputEncoding === 'base64url' ? 'base64' : outputEncoding)
 		if (outputEncoding === 'base64url') {
 			output = base64url.escape(output)
 		}
-		process.stdout.write(output)
-	}))
+		return output
+	}
+
+	var stream = inputEncoding === 'binary' ? process.stdin : process.stdin.pipe(trimTrailingWhitespaceStream())
+
+	stream.pipe(through2(function(chunk, enc, callback) {
+		this.push(turnIntoProperOutputBuffer(turnIntoProperInputBuffer(chunk)))
+		callback()
+	})).pipe(process.stdout)
+}
+
+function trimTrailingWhitespaceStream() {
+	var lastChunk = null
+	return through2(function(chunk, enc, cb) {
+		if (lastChunk) {
+			this.push(lastChunk)
+		}
+		lastChunk = chunk
+		cb()
+	}, function flush(cb) {
+		this.push(new Buffer(trimTailingNewline(lastChunk.toString())))
+		cb()
+	})
 }
 
 function encodingIsAllowed(encoding) {
@@ -48,6 +70,6 @@ function printErrorMessage() {
 	console.log('echo words | pipetransform --trim utf8 hex => 776f726473')
 }
 
-function possiblyTrimTail(input) {
-	return input.charAt(input.length - 1) === '\n' ? input.slice(0, input.length - 1) : input
+function trimTailingNewline(str) {
+	return str.replace(/\n$/, '')
 }
