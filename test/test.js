@@ -47,9 +47,9 @@ test('base64url to utf8', function (t) {
 })
 
 test('image file to base64url', function(t) {
-	var expectedStream = fs.createReadStream('./test-image-datauri-output.txt')
+	var expectedStream = fs.createReadStream('./test/test-image-datauri-output.txt')
 
-	var spawned = execspawn('cat ./test-image.jpg | node bin.js binary base64url')
+	var spawned = execspawn('cat ./test/test-image.jpg | node bin.js binary base64url')
 
 	equalStreams(spawned.stdout, expectedStream, function(err, equal) {
 		t.notOk(err)
