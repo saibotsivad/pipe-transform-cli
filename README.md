@@ -1,4 +1,4 @@
-# pipe-transform-cli
+# pipe-transform-cli [![Build Status](https://travis-ci.org/tobiaslabs/pipe-transform-cli.svg?branch=master)](https://travis-ci.org/tobiaslabs/pipe-transform-cli)
 
 Command line utility to pipe one input encoding to another encoding
 
