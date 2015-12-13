@@ -18,6 +18,9 @@
     "encoding"
   ],
   "author": "saibotsivad",
+  "contributors": [
+    "TehShrike (http://joshduff.com)"
+  ],
   "license": "VOL",
   "bugs": {
     "url": "https://github.com/tobiaslabs/pipe-transform-cli/issues"
