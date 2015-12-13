@@ -25,9 +25,12 @@
   "homepage": "https://github.com/tobiaslabs/pipe-transform-cli#readme",
   "dependencies": {
     "base64-url": "^1.2.1",
-    "concat-stream": "^1.5.1"
+    "through2": "2.0.0"
   },
   "devDependencies": {
+    "cat": "0.2.0",
+    "equal-streams": "0.0.6",
+    "npm-execspawn": "1.2.1",
     "tape": "^4.2.2",
     "tape-spawn": "^1.4.0"
   }
