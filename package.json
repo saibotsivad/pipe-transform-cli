@@ -1,6 +1,6 @@
 {
   "name": "pipe-transform-cli",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Command line utility to pipe one input encoding to another encoding.",
   "bin": {
     "pipetransform": "bin.js"
