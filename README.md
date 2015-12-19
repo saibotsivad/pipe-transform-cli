@@ -4,6 +4,10 @@ Command line utility to pipe one input encoding to another encoding
 
 ## install
 
+This utility requires [nodejs](http://nodejs.org/) to be installed.
+
+Then, install the normal way with:
+
 	npm install -g pipe-transform-cli
 
 ## use it
