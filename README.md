@@ -1,5 +1,7 @@
 # pipe-transform-cli [![Build Status](https://travis-ci.org/tobiaslabs/pipe-transform-cli.svg?branch=master)](https://travis-ci.org/tobiaslabs/pipe-transform-cli)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/saibotsivad/pipe-transform-cli.svg)](https://greenkeeper.io/)
+
 Command line utility to pipe one input encoding to another encoding
 
 ## install
